@@ -13,8 +13,16 @@ export default function topbar() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
+            <Typography
+              variant="h5"
+              component="h5"
+              sx={{ flexGrow: 1 }}
+              pl={3}
+              //   fontFamily={`'Zen Antique Soft', serif`}
+              //   fontFamily={`'Zen Antique Soft', serif`}
+              fontWeight={400}
+            >
+              User List App
             </Typography>
           </Toolbar>
         </AppBar>
