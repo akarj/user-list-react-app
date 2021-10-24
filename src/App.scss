@@ -1,10 +1,17 @@
 .App-container {
   text-align: center;
-  div.topbar {
-    height: 3rem;
-    border-bottom: 1px solid #000;
-    background-color: rgb(187, 171, 171);
-  }
+  position: relative;
+
   div.bottomSection {
+    color: #fefefe;
+    display: flex;
+    div.leftSection {
+      align-items: center;
+      place-content: center;
+      flex: 4;
+    }
+    div.rightSection {
+      flex: 6;
+    }
   }
 }
