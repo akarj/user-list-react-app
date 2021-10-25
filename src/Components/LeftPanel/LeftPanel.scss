@@ -1,12 +1,15 @@
 div.Left-Panel-Container {
   //   min-height: 40rem;
-  &::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    border-right: 1px solid #f2f2f2;
-    height: 5rem;
-  }
+  // border: 1px solid rgb(253, 252, 252);
+  // &::before {
+  //   content: "";
+  //   position: relative;
+  //   top: 3rem;
+  //   right: -17rem;
+  //   // right: ;
+  //   border-right: 1px solid #f2f2f2;
+  //   height: 12vh;
+  // }
 
   section {
     place-content: center;
