@@ -1,16 +1,4 @@
 div.Left-Panel-Container {
-  //   min-height: 40rem;
-  // border: 1px solid rgb(253, 252, 252);
-  // &::before {
-  //   content: "";
-  //   position: relative;
-  //   top: 3rem;
-  //   right: -17rem;
-  //   // right: ;
-  //   border-right: 1px solid #f2f2f2;
-  //   height: 12vh;
-  // }
-
   section {
     place-content: center;
     place-items: center;
@@ -21,13 +9,7 @@ div.Left-Panel-Container {
       text-align: center;
       line-height: 6rem;
       text-transform: uppercase;
-      transform: translateY(50%);
-
-      // writing-mode: vertical-rl;
-      // font-family: "Lato", sans-serif;
-      // font-family: "Lora", serif;
-      // font-family: "Poppins", sans-serif;
-      // font-family: "Zen Antique Soft", serif;
+      transform: translateY(40%);
     }
   }
 }
