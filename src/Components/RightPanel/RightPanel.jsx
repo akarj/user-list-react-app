@@ -3,15 +3,13 @@ import List from "@mui/material/List";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
-
-// import ListItem from "@mui/material/ListItem";
-// import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import Item from "../Item/Item";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { CircularProgress, TextField } from "@mui/material";
 import UploadImageFile from "../UploadImageFile/UploadImageFile";
+import EditUser from "../EditUser/EditUser";
 const axios = require("axios");
 
 const style = {
@@ -40,7 +38,7 @@ export default function RightPanel() {
   const [last_name_Error, setLastname_Error] = useState(false);
   const [email_Error, setEmail_Error] = useState(false);
   const [modelOpen, setModalOpen] = useState(false);
-  // const [modelOpen, setModalOpen] = useState(true);
+  const [editModelOpen, setEditModelOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -56,8 +54,9 @@ export default function RightPanel() {
     getUser();
   }, []);
 
-  const EditUserHandler = () => {
+  const EditUserHandler = e => {
     console.log("User Edit");
+    console.log(e);
   };
   const DeleteUserHandler = id => {
     const newUsersData = users.filter(users => users.data.id !== id);
