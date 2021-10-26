@@ -13,22 +13,9 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
-  const [checked, setChecked] = React.useState([1]);
-
-  const handleToggle = value => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
   return (
     <div className="item-container">
+      {console.log(user, "list")}
       <ListItem
         key={`user in List : ${user.data.id}`}
         secondaryAction={
@@ -44,7 +31,7 @@ export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
             <IconButton
               edge="end"
               aria-label="delete"
-              onClick={DeleteUserHandler}
+              onClick={() => DeleteUserHandler(user.data.id)}
             >
               <DeleteIcon sx={{ color: "red" }} />
             </IconButton>
@@ -74,6 +61,7 @@ export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
           />
         </ListItemButton>
       </ListItem>
+      <Divider variant="inset" component="li" color="white" />
     </div>
   );
 }

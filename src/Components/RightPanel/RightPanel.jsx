@@ -35,11 +35,12 @@ export default function RightPanel() {
   const [first_name, setFirstname] = useState("");
   const [last_name, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [avatar, setAvatar] = useState(null);
   const [first_name_Error, setFirstname_Error] = useState(false);
   const [last_name_Error, setLastname_Error] = useState(false);
   const [email_Error, setEmail_Error] = useState(false);
-  // const [modelOpen, setModalOpen] = useState(false);
-  const [modelOpen, setModalOpen] = useState(true);
+  const [modelOpen, setModalOpen] = useState(false);
+  // const [modelOpen, setModalOpen] = useState(true);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
@@ -47,18 +48,19 @@ export default function RightPanel() {
     const getUser = async () => {
       try {
         const response = await axios.get("https://reqres.in/api/users/1");
-        console.log("response", response.data.data);
-        // setUsers([...users, response.data.data]);
+        setUsers([...users, response.data]);
       } catch (err) {
         console.log(err);
       }
     };
     getUser();
   }, []);
+
   const EditUserHandler = () => {
     console.log("User Edit");
   };
-  const DeleteUserHandler = () => {
+  const DeleteUserHandler = id => {
+    console.log(id);
     console.log("User Delete");
   };
   const AddNameToListHandler = async e => {
@@ -69,24 +71,24 @@ export default function RightPanel() {
     if (first_name === "") setFirstname_Error(true);
     if (last_name === "") setLastname_Error(true);
     if (email === "") setEmail_Error(true);
-    if (!first_name_Error && !last_name_Error && !email_Error) {
+    if (!first_name_Error || !last_name_Error || !email_Error) {
       setLoading(true);
-      console.log("Form submitted");
       const data = {
         first_name,
         last_name,
         email,
+        avatar,
       };
       var res;
-      // axios.post("")
       try {
         const response = await axios.post("https://reqres.in/api/users", data);
-        console.log(response.data);
+
         res = { ...response };
         setTimeout(() => {
           setUsers([...users, res]);
-          // handleModalClose();
-        }, 500);
+          handleModalClose();
+        }, 300);
+        users.map(user => console.log({ user }));
         setLoading(false);
       } catch (err) {
         console.log("error while sending data to API or receiving", err);
@@ -163,7 +165,7 @@ export default function RightPanel() {
                 fullWidth
                 error={email_Error}
               />
-              <UploadImageFile />
+              <UploadImageFile imageFile={avatar} setImageFile={setAvatar} />
 
               <br />
               <Button
