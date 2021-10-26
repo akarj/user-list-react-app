@@ -60,8 +60,8 @@ export default function RightPanel() {
     console.log("User Edit");
   };
   const DeleteUserHandler = id => {
-    console.log(id);
-    console.log("User Delete");
+    const newUsersData = users.filter(users => users.data.id !== id);
+    setUsers([...newUsersData]);
   };
   const AddNameToListHandler = async e => {
     e.preventDefault();

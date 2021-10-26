@@ -15,7 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
   return (
     <div className="item-container">
-      {console.log(user, "list")}
+      {/* {console.log(user, "list")} */}
       <ListItem
         key={`user in List : ${user.data.id}`}
         secondaryAction={
