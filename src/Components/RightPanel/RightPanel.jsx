@@ -54,9 +54,21 @@ export default function RightPanel() {
     getUser();
   }, []);
 
-  const EditUserHandler = e => {
+  const EditUserHandler = editedUserData => {
     console.log("User Edit");
-    console.log(e);
+    const newUsersData = [
+      {
+        data: {
+          ...editedUserData,
+        },
+      },
+      ...users.filter(users => users.data.id !== editedUserData.id),
+    ];
+    console.log(users);
+    console.log(editedUserData);
+    console.log(newUsersData);
+
+    setUsers([...newUsersData]);
   };
   const DeleteUserHandler = id => {
     const newUsersData = users.filter(users => users.data.id !== id);

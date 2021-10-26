@@ -1,6 +1,5 @@
 import "./Item.scss";
-import * as React from "react";
-
+import React, { useState } from "react";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,13 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  Button,
-  CircularProgress,
-  IconButton,
-  Modal,
-  TextField,
-} from "@mui/material";
+import { Button, IconButton, Modal, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box } from "@mui/system";
 import UploadImageFile from "../UploadImageFile/UploadImageFile";
@@ -34,12 +27,31 @@ const style = {
 
 export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
   const [EditUserModelOpen, setEditUserModelOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [first_name, setFirstname] = useState(user.data.first_name);
+  const [last_name, setLastname] = useState(user.data.last_name);
+  const [email, setEmail] = useState(user.data.email);
+  const id = user.data.id;
+  const [avatar, setAvatar] = useState(user.data.avatar);
+
   const EditUserHandlerr = user => {
-    console.log(user);
     setEditUserModelOpen(true);
-    var correctedUser = {};
-    EditUserHandler(correctedUser);
+  };
+
+  const EditUserFormSubmitHandler = async e => {
+    e.preventDefault();
+
+    const data = {
+      first_name,
+      last_name,
+      email,
+      avatar,
+      id,
+    };
+    setTimeout(() => {
+      console.log(data);
+      setEditUserModelOpen(false);
+      EditUserHandler(data);
+    }, 300);
   };
   return (
     <div className="item-container">
@@ -96,6 +108,8 @@ export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
         onClose={() => setEditUserModelOpen(false)}
         aria-labelledby="Edit Modal"
         aria-describedby="This modal is for the edit of the user"
+        sx={{ backgroundColor: "White" }}
+        color="primary"
       >
         <Box sx={style}>
           <form
@@ -103,70 +117,50 @@ export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
             noValidate
             autoComplete="off"
             // sx={formStyle}
-            // onSubmit={EditUserHandlerr}
-            EditUserModelOpen
+            onSubmit={EditUserFormSubmitHandler}
           >
             <TextField
+              className="textField"
               label="First Name"
-              placeholder="Enter Your First name..."
+              placeholder={user.data.first_name}
               variant="outlined"
-              // color={first_name_Error ? "error" : "secondary"}
-              // onChange={e => setFirstname(e.target.value)}
+              color="secondary"
+              onChange={e => setFirstname(e.target.value)}
               fullWidth
               sx={{ mb: "1rem" }}
               required
-              // error={first_name_Error}
             />
-            {/* <TextField
+            <TextField
               label="Last Name"
-              placeholder="Enter Your Last name..."
+              placeholder={user.data.last_name}
               variant="outlined"
-              color={last_name_Error ? "error" : "secondary"}
+              color="secondary"
               onChange={e => setLastname(e.target.value)}
               fullWidth
               required
               sx={{ mb: "1rem" }}
-              error={last_name_Error}
             />
             <TextField
               label="Email Address"
               variant="outlined"
-              placeholder="Enter Your Email Address..."
-              color={email_Error ? "error" : "secondary"}
+              placeholder={user.data.email}
+              color="secondary"
               type="email"
               onChange={e => setEmail(e.target.value)}
               required
               sx={{ mb: "1rem" }}
               fullWidth
-              error={email_Error}
             />
-            <UploadImageFile imageFile={avatar} setImageFile={setAvatar} /> */}
+            <UploadImageFile imageFile={avatar} setImageFile={setAvatar} />
 
             <br />
             <Button
               variant="contained"
-              // color={
-              //   first_name_Error || last_name_Error || email_Error
-              //     ? "error"
-              //     : "info"
-              // }
               type="submit"
               sx={{ alignContent: "center" }}
               fullWidth
             >
-              {loading ? (
-                <Box sx={{ display: "flex" }}>
-                  <CircularProgress
-                    size={20}
-                    sx={{
-                      color: "white",
-                      marginRight: "1rem",
-                    }}
-                  />
-                </Box>
-              ) : (
-                <>Submit</>
-              )}
+              Submit
             </Button>
           </form>
         </Box>

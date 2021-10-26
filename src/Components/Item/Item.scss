@@ -1,3 +1,9 @@
 div.item-container {
   min-height: 3rem;
 }
+.textField {
+  color: aliceblue;
+  &::placeholder {
+    color: aliceblue;
+  }
+}
