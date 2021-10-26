@@ -6,11 +6,13 @@ import Divider from "@mui/material/Divider";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemButton from "@mui/material/ListItemButton";
-import Checkbox from "@mui/material/Checkbox";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 
-export default function Item({ user }) {
+export default function Item({ user, EditUserHandler, DeleteUserHandler }) {
   const [checked, setChecked] = React.useState([1]);
 
   const handleToggle = value => () => {
@@ -28,25 +30,47 @@ export default function Item({ user }) {
   return (
     <div className="item-container">
       <ListItem
-        key={`user in List : ${user.id}`}
+        key={`user in List : ${user.data.id}`}
         secondaryAction={
-          <Checkbox
-            edge="end"
-            onChange={handleToggle(user.id)}
-            checked={checked.indexOf(user.id) !== -1}
-            inputProps={{ "aria-labelledby": user.id }}
-          />
+          <>
+            <IconButton
+              edge="end"
+              aria-label="edit"
+              sx={{ mr: "1rem" }}
+              onClick={EditUserHandler}
+            >
+              <EditIcon sx={{ color: "white" }} />
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={DeleteUserHandler}
+            >
+              <DeleteIcon sx={{ color: "red" }} />
+            </IconButton>
+          </>
         }
         disablePadding
       >
         <ListItemButton>
           <ListItemAvatar>
-            <Avatar alt={`Avatar n°${user.id}`} src={user.avatar} />
+            <Avatar alt={`Avatar n°${user.data.id}`} src={user.data.avatar} />
           </ListItemAvatar>
           <ListItemText
-            id={user.id}
-            primary={`${user.first_name} ${user.last_name}`}
-            secondary={user.email}
+            id={user.data.id}
+            primary={`${user.data.first_name} ${user.data.last_name}`}
+            secondary={
+              <>
+                <Typography
+                  sx={{ display: "inline" }}
+                  component="span"
+                  variant="body2"
+                  color="aliceblue"
+                >
+                  {user.data.email}
+                </Typography>
+              </>
+            }
           />
         </ListItemButton>
       </ListItem>
